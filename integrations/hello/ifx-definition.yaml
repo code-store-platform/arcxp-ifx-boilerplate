@@ -1,0 +1,9 @@
+integrationName: hello-world
+description: "This is an example integration. ignore:true will prevent the integration from being deployed/promoted"
+email: msadovyi@code.store
+events:
+  - story:update
+  - story:create
+runtime: node
+enabled: true
+ignore: false

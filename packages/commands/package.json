@@ -1,0 +1,22 @@
+{
+  "name": "@ifx/commands",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "description": "Contains scripts for the IFX integrations",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ifx/shared": "workspace:*",
+    "@ifx/tsconfig": "workspace:*",
+    "@types/node": "^20.8.10",
+    "inquirer": "^12.1.0",
+    "esbuild": "^0.24.0",
+    "cpy-cli": "^5.0.0",
+		"rimraf": "^5.0.1"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "paths": {
+      "@ifx/shared/*": ["../../packages/shared/src"],
+      "@ifx/commands/*": ["../../packages/commands/src/"]
+    }
+  }
+}

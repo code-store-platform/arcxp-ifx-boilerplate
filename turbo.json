@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "ifx": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false
+    },
+    "build": {
+      "outputs": ["dist"]
+    }
+  }
+}
