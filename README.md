@@ -1,4 +1,3 @@
-```markdown
 # About
 
 This boilerplate code simplifies setting up and managing ArcXP IFX in an imperative way.  
@@ -150,4 +149,3 @@ curl --location 'http://localhost:54265/' \
 
 ## Happy Developing!
 Feel free to explore all commands and contribute to optimizing the flow for managing ArcXP integrations.
-```
