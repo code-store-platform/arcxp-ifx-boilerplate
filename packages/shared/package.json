@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "code.store",
+  "license": "MIT",
   "dependencies": {
     "yaml": "^2.6.1",
 		"@code.store/arcxp-sdk-ts": "^4.32.1",

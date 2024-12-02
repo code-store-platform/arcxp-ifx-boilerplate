@@ -3,8 +3,8 @@
 	"version": "1.0.0",
 	"packageManager": "^pnpm@8.0.0",
 	"engines": {
-		"node": "18.13.0",
-		"npm": "8.x"
+		"node": "^20.x",
+		"pnpm": "^8.x"
 	},
 	"main": "index.js",
 	"scripts": {
@@ -14,6 +14,14 @@
 		"ifx": "turbo run ifx",
 		"dev": "turbo run dev"
 	},
+	"keywords": [
+    "ArcXP",
+    "SDK",
+		"IFX",
+    "Code.Store"
+  ],
+  "author": "code.store",
+  "license": "MIT",
 	"dependencies": {
 		"@arcxp/arcxp-ifx-node-sdk": "1.3.1",
 		"@code.store/arcxp-sdk-ts": "^4.32.1",

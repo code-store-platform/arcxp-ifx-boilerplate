@@ -8,8 +8,8 @@
     "build": "npx tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "code.store",
+  "license": "MIT",
   "devDependencies": {
     "@ifx/shared": "workspace:*",
     "@ifx/tsconfig": "workspace:*",
