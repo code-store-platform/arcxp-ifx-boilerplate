@@ -47,11 +47,23 @@ export class DevCommand extends IFXCommand {
 			return this.sendJSON(res, 404, { error: "Send POST requests to '/'" });
 		});
 
-		server.listen(process.env.PORT || 0, () => {
+		const port = process.env.PORT || this.getPortFromName();
+		server.listen(port, () => {
 			const address = server.address() as AddressInfo;
 
 			logger.debug(`Dev server is running at http://localhost:${address.port}`);
 		});
+	}
+
+	private getPortFromName(minPort = 50000, maxPort = 65535): number {
+		// Create a simple hash from the string
+		const hash = this.def.integrationName.split("").reduce((acc, char) => {
+			return ((acc << 5) - acc + char.charCodeAt(0)) | 0;
+		}, 0);
+
+		// Convert hash to a port number within the valid range
+		const port = (Math.abs(hash) % (maxPort - minPort)) + minPort;
+		return port;
 	}
 
 	sendJSON(res: ServerResponse, status: number, body: any) {
