@@ -41,7 +41,14 @@ export class IFXService {
 				retriesLeft -= 1;
 				await sleep(5 * 1000);
 			} else {
-				this.logger.debug(logs, "Logs");
+				for (const log of logs.events) {
+					try {
+						const message = JSON.parse(log.message);
+						this.logger[message.levelLabel](message, message.msg);
+					} catch {
+						this.logger.debug(log);
+					}
+				}
 				return logs;
 			}
 		}
