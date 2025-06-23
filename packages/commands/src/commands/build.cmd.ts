@@ -14,14 +14,14 @@ export class BuildCommand extends IFXCommand {
 	}
 
 	cleanDist() {
-		execSync(`npx rimraf ${this.ifxDir("./dist")}`);
+		execSync(`npx rimraf ${this.ifxDir("dist")}`);
 	}
 
 	async build() {
 		logger.debug("Building source");
 		await esbuild.build({
-			entryPoints: [this.ifxDir("./src/eventsHandlers.ts")],
-			outdir: this.ifxDir("./dist/src/"),
+			entryPoints: [this.eventsHandlersPath],
+			outdir: this.ifxDir("dist", "src"),
 			bundle: true,
 			platform: "node",
 			define: {
@@ -32,19 +32,19 @@ export class BuildCommand extends IFXCommand {
 
 	async copyRouter() {
 		logger.debug("Copying router");
-		await this.copy(this.ifxDir("./src/eventsRouter.json"), this.ifxDir("./dist/src/eventsRouter.json"));
+		await this.copy(this.eventsRouterPath, this.ifxDir("dist", "src", "eventsRouter.json"));
 	}
 
 	async copyNodeModules() {
 		logger.debug("Copying node_modules");
-		await this.copy(this.ifxDir("./node_modules"), this.ifxDir("./dist/node_modules"));
+		await this.copy(this.ifxDir("node_modules"), this.ifxDir("dist", "node_modules"));
 	}
 
 	async executeHealthRoute() {
 		logger.debug("Executing health route");
 
 		try {
-			await require(this.ifxDir("./dist/src/eventsHandlers.js")).health({
+			await require(this.ifxDir("dist", "src", "eventsHandlers.js")).health({
 				key: "key",
 				eventName: "build",
 			});

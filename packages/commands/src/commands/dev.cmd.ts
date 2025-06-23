@@ -14,7 +14,8 @@ export class DevCommand extends IFXCommand {
 		await this.serve();
 	}
 
-	async handle(eventName: string, data: any) {
+	async handle(event: IFXEvent) {
+		const eventName = event.key;
 		let handler = (...args: any[]) => {
 			throw new Error("Handler not found");
 		};
@@ -29,15 +30,15 @@ export class DevCommand extends IFXCommand {
 			handler = this.handlers.defaultHandler;
 		}
 
-		return await handler(data);
+		return await handler(event);
 	}
 
 	async serve() {
 		const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
 			if (req.url === "/" && req.method === "POST") {
 				try {
-					const data = await this.parseJSON(req);
-					const response = await this.handle(data.key, data.body);
+					const event = await this.parseJSON(req);
+					const response = await this.handle(event);
 					return this.sendJSON(res, 200, response);
 				} catch (error: any) {
 					return this.sendJSON(res, 400, { error: error.toString() });

@@ -18,8 +18,8 @@ It comes with standard commands to manage your integrations, deliver your code, 
 
 ## Prerequisites
 
-- **Node.js** 20.x or higher.
-- **pnpm** 8.x or higher.
+- **Node.js** 22.x or higher.
+- **pnpm** 8.x.
 - Run `pnpm install` to install all dependencies.
 - Create `.env.sandbox` by duplicating `.env.example` and updating the necessary values.
 

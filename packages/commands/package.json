@@ -13,7 +13,7 @@
   "devDependencies": {
     "@ifx/shared": "workspace:*",
     "@ifx/tsconfig": "workspace:*",
-    "@types/node": "^20.8.10",
+    "@types/node": "^22.0.0",
     "inquirer": "^12.1.0",
     "esbuild": "^0.24.0",
     "cpy-cli": "^5.0.0",

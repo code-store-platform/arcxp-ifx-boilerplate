@@ -2,6 +2,9 @@ import path from "node:path";
 import { type ArcAPI, type IFXIntegrationDefinition, type IFXService, paths } from "@ifx/shared";
 
 export class IFXCommand {
+	protected eventsHandlersPath = this.ifxDir("src", "eventsHandlers.ts");
+	protected eventsRouterPath = this.ifxDir("src", "eventsRouter.json");
+
 	constructor(
 		public def: IFXIntegrationDefinition,
 		public ifx: IFXService,
@@ -17,12 +20,12 @@ export class IFXCommand {
 	}
 
 	protected eventsHandlers() {
-		return import(this.ifxDir("./src/eventsHandlers.ts"));
+		return import(this.eventsHandlersPath);
 	}
 
 	protected eventsRouter() {
 		try {
-			return require(this.ifxDir("./src/eventsRouter.json")) as Record<string, string[]>;
+			return require(this.eventsRouterPath) as Record<string, string[]>;
 		} catch (error) {
 			throw new Error("require eventsRouter.json failed", { cause: error });
 		}
