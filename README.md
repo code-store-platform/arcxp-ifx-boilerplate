@@ -3,6 +3,14 @@
 This boilerplate code simplifies setting up and managing ArcXP IFX in an imperative way.  
 It comes with standard commands to manage your integrations, deliver your code, and utilities for faster development.
 
+You can start a new project by forking this repository directly. 
+Alternatively, copy the code into a new repo and later add this boilerplate as a remote to stay in sync. To sync changes from the boilerplate, run:
+```bash
+git remote add boilerplate https://github.com/code-store-platform/arcxp-ifx-boilerplate.git
+git fetch boilerplate
+git merge boilerplate/main
+```
+
 ---
 
 # Project Structure
