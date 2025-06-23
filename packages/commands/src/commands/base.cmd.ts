@@ -1,5 +1,6 @@
 import path from "node:path";
 import { type ArcAPI, type IFXIntegrationDefinition, type IFXService, paths } from "@ifx/shared";
+import { pathToFileURL } from 'node:url'
 
 export class IFXCommand {
 	protected eventsHandlersPath = this.ifxDir("src", "eventsHandlers.ts");
@@ -20,7 +21,7 @@ export class IFXCommand {
 	}
 
 	protected eventsHandlers() {
-		return import(this.eventsHandlersPath);
+		return import(pathToFileURL(this.eventsHandlersPath).href);
 	}
 
 	protected eventsRouter() {
