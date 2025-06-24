@@ -12,6 +12,13 @@
 		"check": "npx @biomejs/biome check --write --unsafe ./",
 		"build": "turbo run build",
 		"ifx": "turbo run ifx",
+		"ifx:dev": "turbo run ifx -- dev",
+		"ifx:build": "turbo run ifx -- build",
+		"ifx:logs": "turbo run ifx -- logs",
+		"ifx:deploy": "turbo run ifx -- deploy",
+		"ifx:promote": "turbo run ifx -- promote",
+		"ifx:provision": "turbo run ifx -- provision",
+		"ifx:status": "turbo run ifx -- status",
 		"dev": "turbo run dev"
 	},
 	"keywords": [
