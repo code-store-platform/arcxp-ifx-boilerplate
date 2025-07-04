@@ -30,7 +30,8 @@ git merge boilerplate/main
 - **pnpm** 8.x.
 - Run `pnpm install` to install all dependencies.
 - Create `.env.sandbox` by duplicating `.env.example` and updating the necessary values.
-
+- Create `.npmrc` by duplicating `.npmrc.example` and updating the necessary values.
+ 
 ---
 
 ## How to Create a New Integration?
