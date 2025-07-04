@@ -9,7 +9,9 @@
     "lint": "npx @biomejs/biome lint",
     "ifx": "npx tsx ./src/script.ts",
     "dev": "npx tsx watch ./src/script.ts dev",
-    "build": "npx tsx ./src/script.ts build"
+    "build": "npx tsx ./src/script.ts build",
+    "destroy": "npx tsx ./src/script.ts destroy",
+    "promote": "npx tsx ./src/script.ts promote"
   },
   "keywords": [],
   "author": "code.store",

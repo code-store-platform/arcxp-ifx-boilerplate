@@ -51,13 +51,12 @@ git merge boilerplate/main
    ignore: false
    ```
 4. Install dependencies: `pnpm install`.
-5. Run `pnpm run ifx -- provision` to create the integration on ArcXP. Wait for the provisioning system bundle.
-6. Run `pnpm run ifx -- deploy` to deploy the new bundle to IFX.  
-7. Run `pnpm run ifx -- provision` again to subscribe to events, set up environment variables, enable/disable the integration, etc.  
-8. Write event handlers:
+5. Run `pnpm run ifx -- provision` to create the integration on ArcXP. It will also deploy the first bundle, subscribe to events, set up environment variables, enable/disable the integration, etc.
+6. Write event handlers:
    - Add handlers to the `eventsHandlers` folder.
    - Export them in `eventsHandlers.ts`.
    - Define their usage in the `eventsRouter.json`.
+7. Run `pnpm run ifx -- deploy` to deploy the new bundle to IFX.  
 
 **Note:** Look at handler example here: `./integrations/hello/src/eventsHandlers/example.ts`.
 
@@ -78,15 +77,15 @@ git merge boilerplate/main
 ### Available Commands
 
 #### **1. `pnpm run ifx -- provision`**  
-Manages the integration.  
-- Applies settings from `ifx-definition.yml` to ArcXP.  
-- If the integration doesn't exist, it will be created. After creation, **you must deploy a bundle before updating it any further**.  
-- If the integration exists, it will handle actions like:  
-  - Enabling/disabling.  
-  - Subscribing/unsubscribing to events.  
-  - Adding secrets (fetched from `.env.sandbox` or `.env.prod`).  
+Creates or updates the integration in ArcXP.
+- Applies settings from `ifx-definition.yml`.
+- If the integration does not exist, it will be created.
+- If it already exists, it updates:
+  - Status (`enable`/`disable`)
+  - Subscribed events
+  - Secret variables (from `.env.sandbox` or `.env.prod`)
 
-**Note:** Integration-specific `.env.sandbox` files override the root's `.env.sandbox`.
+> **Note:** Integration-specific `.env.sandbox` files take precedence over the root `.env.sandbox`.
 
 ---
 
@@ -105,7 +104,7 @@ Builds the integration:
 ---
 
 #### **4. `pnpm run ifx -- promote`**  
-Promotes (makes live) the selected bundle.  
+Promotes (makes LIVE) the selected bundle.  
 - It's recommended to run this in the specific integration folder.  
 - You will be prompted to select the bundle to promote.
 

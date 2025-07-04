@@ -4,6 +4,10 @@ import { IFXCommand } from "./base.cmd";
 
 export class PromoteCommand extends IFXCommand {
 	async execute() {
+		this.notAllowedInTurbo(
+			"Run this command in the integration directory: cd ./integrations/<integration> && npm run promote",
+		);
+
 		const bundles = await this.ifx.getBundles();
 		const available = bundles.results.filter((b) => b.deployVersion).slice(0, 10);
 		const { bundle } = await inquirer.prompt([

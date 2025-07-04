@@ -1,5 +1,5 @@
 import { execSync } from "node:child_process";
-import { rmSync } from "node:fs";
+import fs from "node:fs";
 import path from "node:path";
 import { env, logger, paths } from "@ifx/shared";
 import { IFXCommand } from "./base.cmd";
@@ -10,7 +10,9 @@ export class DeployCommand extends IFXCommand {
 
 		logger.debug({ tmpBundlePath }, `Deploy started to env ${env.ARC_ENV}`);
 
-		rmSync(tmpBundlePath, { force: true });
+		this.cleanTmpDir(tmpBundlePath);
+		this.cleanDistDir();
+
 		execSync("npm run lint", { stdio: "inherit" });
 		execSync("npm run build", { stdio: "inherit" });
 		execSync(`(cd dist/ && zip -r ${tmpBundlePath} ./* -x \"dist.zip\")`, { stdio: "inherit" });
@@ -30,5 +32,17 @@ export class DeployCommand extends IFXCommand {
 
 	getBundleName() {
 		return `${new Date().toISOString().replaceAll(/[:.]/g, "_")}-${process.env.USER || "anon"}`;
+	}
+
+	private cleanTmpDir(bundlePath: string) {
+		if (!fs.existsSync(paths.tmp)) {
+			fs.mkdirSync(paths.tmp);
+		}
+
+		fs.rmSync(bundlePath, { force: true });
+	}
+
+	private cleanDistDir() {
+		fs.rmSync(this.ifxDir("dist"), { force: true, recursive: true });
 	}
 }
