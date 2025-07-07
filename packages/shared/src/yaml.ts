@@ -9,3 +9,11 @@ export const getDefinition = () => {
 
 	return definition;
 };
+
+export const parseYaml = (yaml: string) => {
+	return YAML.parse(yaml);
+};
+
+export const stringifyYaml = (yaml: any) => {
+	return YAML.stringify(yaml);
+};

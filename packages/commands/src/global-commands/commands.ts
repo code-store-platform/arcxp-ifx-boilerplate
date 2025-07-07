@@ -1,7 +1,9 @@
-import { execute as deleteCmd } from "./delete";
+import { execute as destroyCmd } from "./destroy";
+import { execute as initCmd } from "./init";
 import { execute as promoteCmd } from "./promote";
 
 export const commands = {
-	delete: deleteCmd,
+	destroy: destroyCmd,
 	promote: promoteCmd,
+	init: initCmd,
 };

@@ -34,29 +34,15 @@ git merge boilerplate/main
 ---
 
 ## How to Create a New Integration?
-
-1. **Duplicate the `./integrations/hello` folder** and rename it to your integration name.
-2. **Update `package.json`:** Set `name` to match your integration name.
-3. **Update `ifx-definition.yaml`:** Add your integration settings. Ensure to set `ignore: false` to allow running commands on this integration.  
-   Example `ifx-definition.yaml`:
-   ```yml
-   integrationName: my-first-integration
-   description: "This is my first ArcXP IFX integration"
-   email: msadovyi@code.store
-   events:
-     - story:update
-     - story:create
-   runtime: node
-   enabled: true
-   ignore: false
-   ```
-4. Install dependencies: `pnpm install`.
-5. Run `pnpm run ifx:provision` to create the integration on ArcXP. It will also deploy the first bundle, subscribe to events, set up environment variables, enable/disable the integration, etc.
-6. Write event handlers:
+1. **Run the `pnpm run ifx:init` command** and follow the prompts.
+  - This command will create a new integration folder in `./integrations/` with the necessary files.
+  - It will install all dependencies and will provision the integration in IFX.
+2. Write event handlers:
    - Add handlers to the `eventsHandlers` folder.
    - Export them in `eventsHandlers.ts`.
    - Define their usage in the `eventsRouter.json`.
-7. Run `pnpm run ifx:deploy` to deploy the new bundle to IFX.  
+3. Run `pnpm run ifx:deploy` to deploy the new bundle to IFX.
+4. To update the integration in IFX, update the `ifx-definition.yml` file and run `pnpm run ifx:provision`.
 
 **Note:** Look at handler example here: `./integrations/hello/src/eventsHandlers/example.ts`.
 
@@ -76,7 +62,14 @@ git merge boilerplate/main
 
 ### Available Commands
 
-#### **1. `pnpm run ifx:provision`**  
+#### **`pnpm run ifx:init`**  
+Creates and provisions a new integration in ArcXP.
+- Copies the "hello" boilerplate to the `./integrations` folder
+- Runs `pnpm run ifx:provision` inside the new integration folder.
+
+---
+
+#### **`pnpm run ifx:provision`**  
 Creates or updates the integration in ArcXP.
 - Applies settings from `ifx-definition.yml`.
 - If the integration does not exist, it will be created.
@@ -89,36 +82,36 @@ Creates or updates the integration in ArcXP.
 
 ---
 
-#### **2. `pnpm run ifx:deploy`**  
+#### **`pnpm run ifx:deploy`**  
 Delivers your code to ArcXP:  
 - Lints, builds, and packages the integration code.  
 - Uploads a new bundle and promotes it on ArcXP.
 
 ---
 
-#### **3. `pnpm run ifx:build`**  
+#### **`pnpm run ifx:build`**  
 Builds the integration:  
 - Runs necessary steps for creating a valid build. (see `build.cmd.ts`)  
 - Runs a `health` handler to verify the validity of the build.
 
 ---
 
-#### **4. `pnpm run ifx:promote`**  
+#### **`pnpm run ifx:promote`**  
 Promotes (makes LIVE) the selected bundle.  
 
 ---
 
-#### **5. `pnpm run ifx:destroy`**  
+#### **`pnpm run ifx:destroy`**  
 Delete the selected integration.
 
 ---
 
-#### **6. `pnpm run ifx:logs`**  
+#### **`pnpm run ifx:logs`**  
 Prints the latest logs for every integration.
 
 ---
 
-#### **7. `pnpm run ifx:status`**  
+#### **`pnpm run ifx:status`**  
 Prints detailed information about the integrations, including:  
 - The integration object itself.  
 - Bundles.  
@@ -127,7 +120,7 @@ Prints detailed information about the integrations, including:
 
 ---
 
-#### **8. `pnpm run ifx:dev`**  
+#### **`pnpm run ifx:dev`**  
 Starts a development server in watch mode:  
 - The server listens for `POST` requests to `/`.  
 - By default, it uses a random port. Override it with the `PORT` environment variable.
