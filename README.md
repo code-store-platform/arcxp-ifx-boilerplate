@@ -16,7 +16,7 @@ git merge boilerplate/main
 # Project Structure
 
 - **`./integrations/`** - Contains all the integrations.  
-- **`./packages/commands`** - Contains all commands that can be run for integrations (e.g., `pnpm run ifx -- <command>`).  
+- **`./packages/commands`** - Contains all commands that can be run for integrations (e.g., `pnpm run ifx:<command>`).  
 - **`./packages/shared`** - Contains shared code between commands and integrations, such as logger, ArcAPI, and utilities.  
 - **`./packages/tsconfig`** - Contains the TypeScript configurations (`tsconfig`) for all packages.
 
@@ -51,12 +51,12 @@ git merge boilerplate/main
    ignore: false
    ```
 4. Install dependencies: `pnpm install`.
-5. Run `pnpm run ifx -- provision` to create the integration on ArcXP. It will also deploy the first bundle, subscribe to events, set up environment variables, enable/disable the integration, etc.
+5. Run `pnpm run ifx:provision` to create the integration on ArcXP. It will also deploy the first bundle, subscribe to events, set up environment variables, enable/disable the integration, etc.
 6. Write event handlers:
    - Add handlers to the `eventsHandlers` folder.
    - Export them in `eventsHandlers.ts`.
    - Define their usage in the `eventsRouter.json`.
-7. Run `pnpm run ifx -- deploy` to deploy the new bundle to IFX.  
+7. Run `pnpm run ifx:deploy` to deploy the new bundle to IFX.  
 
 **Note:** Look at handler example here: `./integrations/hello/src/eventsHandlers/example.ts`.
 
@@ -76,7 +76,7 @@ git merge boilerplate/main
 
 ### Available Commands
 
-#### **1. `pnpm run ifx -- provision`**  
+#### **1. `pnpm run ifx:provision`**  
 Creates or updates the integration in ArcXP.
 - Applies settings from `ifx-definition.yml`.
 - If the integration does not exist, it will be created.
@@ -89,38 +89,36 @@ Creates or updates the integration in ArcXP.
 
 ---
 
-#### **2. `pnpm run ifx -- deploy`**  
+#### **2. `pnpm run ifx:deploy`**  
 Delivers your code to ArcXP:  
 - Lints, builds, and packages the integration code.  
 - Uploads a new bundle and promotes it on ArcXP.
 
 ---
 
-#### **3. `pnpm run ifx -- build`**  
+#### **3. `pnpm run ifx:build`**  
 Builds the integration:  
 - Runs necessary steps for creating a valid build. (see `build.cmd.ts`)  
 - Runs a `health` handler to verify the validity of the build.
 
 ---
 
-#### **4. `pnpm run ifx -- promote`**  
+#### **4. `pnpm run ifx:promote`**  
 Promotes (makes LIVE) the selected bundle.  
-- It's recommended to run this in the specific integration folder.  
-- You will be prompted to select the bundle to promote.
 
 ---
 
-#### **5. `pnpm run ifx -- destroy`**  
-Deletes all integrations.
+#### **5. `pnpm run ifx:destroy`**  
+Delete the selected integration.
 
 ---
 
-#### **6. `pnpm run ifx -- logs`**  
+#### **6. `pnpm run ifx:logs`**  
 Prints the latest logs for every integration.
 
 ---
 
-#### **7. `pnpm run ifx -- status`**  
+#### **7. `pnpm run ifx:status`**  
 Prints detailed information about the integrations, including:  
 - The integration object itself.  
 - Bundles.  
@@ -129,7 +127,7 @@ Prints detailed information about the integrations, including:
 
 ---
 
-#### **8. `pnpm run dev`**  
+#### **8. `pnpm run ifx:dev`**  
 Starts a development server in watch mode:  
 - The server listens for `POST` requests to `/`.  
 - By default, it uses a random port. Override it with the `PORT` environment variable.

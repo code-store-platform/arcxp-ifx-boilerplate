@@ -1,4 +1,4 @@
-import { IFXService, arc, env, getDefinition, logger } from "@ifx/shared";
+import { IFXService, arc, getDefinition, logger } from "@ifx/shared";
 import { commands } from "./commands";
 
 export function execute() {
@@ -19,3 +19,5 @@ export function execute() {
 	const ifx = new IFXService(definition, arc);
 	return new Command(definition, ifx, arc).execute();
 }
+
+execute();

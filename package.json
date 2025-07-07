@@ -16,9 +16,12 @@
 		"ifx:build": "turbo run ifx -- build",
 		"ifx:logs": "turbo run ifx -- logs",
 		"ifx:deploy": "turbo run ifx -- deploy",
-		"ifx:promote": "turbo run ifx -- promote",
 		"ifx:provision": "turbo run ifx -- provision",
 		"ifx:status": "turbo run ifx -- status",
+		"ifx:global": "npx tsx ./packages/commands/src/global-commands/index.ts",
+		"ifx:delete": "npm run ifx:global -- delete",
+		"ifx:promote": "npm run ifx:global -- promote",
+		
 		"dev": "turbo run dev"
 	},
 	"keywords": [

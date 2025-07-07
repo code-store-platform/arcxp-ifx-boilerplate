@@ -7,11 +7,11 @@
     "start": "node ./dist/eventsHandlers.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx @biomejs/biome lint",
-    "ifx": "npx tsx ./src/script.ts",
-    "dev": "npx tsx watch ./src/script.ts dev",
-    "build": "npx tsx ./src/script.ts build",
-    "destroy": "npx tsx ./src/script.ts destroy",
-    "promote": "npx tsx ./src/script.ts promote"
+    "ifx": "npx tsx ./src/cli.ts",
+    "dev": "npx tsx watch ./src/cli.ts dev",
+    "build": "npx tsx ./src/cli.ts build",
+    "destroy": "npx tsx ./src/cli.ts destroy",
+    "promote": "npx tsx ./src/cli.ts promote"
   },
   "keywords": [],
   "author": "code.store",

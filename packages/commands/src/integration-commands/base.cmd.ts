@@ -35,12 +35,4 @@ export class IFXCommand {
 			throw new Error("require eventsRouter.json failed", { cause: error });
 		}
 	}
-
-	protected notAllowedInTurbo(explanation: string) {
-		const isTurbo = !!process.env.TURBO_HASH;
-
-		if (isTurbo) {
-			throw new Error(`Command is not allowed in turbo. ${explanation}`);
-		}
-	}
 }
