@@ -6,6 +6,7 @@ import { IFXCommand } from "./base.cmd";
 
 export class BuildCommand extends IFXCommand {
 	public async execute() {
+		this.lint();
 		this.cleanDist();
 		await this.build();
 		await this.copyRouter();
@@ -15,6 +16,10 @@ export class BuildCommand extends IFXCommand {
 
 	cleanDist() {
 		execSync(`npx rimraf ${this.ifxDir("dist")}`);
+	}
+
+	lint() {
+		execSync("npm run lint", { stdio: "inherit" });
 	}
 
 	async build() {
