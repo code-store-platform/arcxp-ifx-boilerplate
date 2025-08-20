@@ -2,6 +2,9 @@
   "name": "@ifx/commands",
   "version": "1.0.0",
   "description": "Contains scripts for the IFX integrations",
+  "bin": {
+    "ifx": "./src/cli.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pnpm exec tsc"
@@ -13,9 +16,10 @@
     "@ifx/shared": "workspace:*",
     "@ifx/tsconfig": "workspace:*",
     "@types/node": "^22.0.0",
-    "inquirer": "^12.1.0",
-    "esbuild": "^0.24.0",
     "cpy-cli": "^5.0.0",
-		"rimraf": "^5.0.1"
+    "esbuild": "^0.24.0",
+    "inquirer": "^12.1.0",
+    "rimraf": "^5.0.1",
+    "commander": "^14.0.0"
   }
 }

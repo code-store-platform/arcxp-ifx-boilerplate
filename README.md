@@ -1,10 +1,11 @@
 # About
 
-This boilerplate code simplifies setting up and managing ArcXP IFX in an imperative way.  
+This boilerplate code simplifies setting up and managing ArcXP IFX in an imperative way.
 It comes with standard commands to manage your integrations, deliver your code, and utilities for faster development.
 
-You can start a new project by forking this repository directly. 
+You can start a new project by forking this repository directly.
 Alternatively, copy the code into a new repo and later add this boilerplate as a remote to stay in sync. To sync changes from the boilerplate, run:
+
 ```bash
 git remote add boilerplate https://github.com/code-store-platform/arcxp-ifx-boilerplate.git
 git fetch boilerplate
@@ -15,10 +16,10 @@ git merge boilerplate/main
 
 # Project Structure
 
-- **`./integrations/`** - Contains all the integrations.  
-- **`./packages/commands`** - Contains all commands that can be run for integrations (e.g., `pnpm run ifx:<command>`).  
-- **`./packages/shared`** - Contains shared code between commands and integrations, such as logger, ArcAPI, and utilities.  
-- **`./packages/tsconfig`** - Contains the TypeScript configurations (`tsconfig`) for all packages.
+* **`./integrations/`** – All integrations live here.
+* **`./packages/commands`** – Command implementations.
+* **`./packages/shared`** – Shared utilities (logger, ArcAPI, etc).
+* **`./packages/tsconfig`** – Centralized TypeScript configs.
 
 ---
 
@@ -26,124 +27,120 @@ git merge boilerplate/main
 
 ## Prerequisites
 
-- **Node.js** 22.x or higher.
-- **pnpm** 8.x.
-- Run `pnpm install` to install all dependencies.
-- Create `.env.sandbox` by duplicating `.env.example` and updating the necessary values.
+* **Node.js** 22.x or higher
+* **pnpm** 8.x
+* Run `pnpm install` to install dependencies
+* Create `.env.sandbox` from `.env.example` and fill in required values
 
 ---
 
-## How to Create a New Integration?
-1. **Run the `pnpm run ifx:init` command** and follow the prompts.
-  - This command will create a new integration folder in `./integrations/` with the necessary files.
-  - It will install all dependencies and will provision the integration in IFX.
-2. Write event handlers:
-   - Add handlers to the `eventsHandlers` folder.
-   - Export them in `eventsHandlers.ts`.
-   - Define their usage in the `eventsRouter.json`.
-3. Run `pnpm run ifx:deploy` to deploy the new bundle to IFX.
-4. To update the integration in IFX, update the `ifx-definition.yml` file and run `pnpm run ifx:provision`.
+# Creating a New Integration
 
-**Note:** Look at handler example here: `./integrations/hello/src/eventsHandlers/example.ts`.
+1. Run:
+
+   ```bash
+   pnpm ifx init
+   ```
+
+   * Creates a new integration folder under `./integrations/`.
+   * Installs dependencies and provisions it in IFX.
+
+2. Add event handlers:
+
+   * Implement handlers in `eventsHandlers/` and export them in `eventsHandlers.ts`.
+   * Wire them up in `eventsRouter.json`.
+
+3. Deploy:
+
+   ```bash
+   pnpm ifx deploy
+   ```
+
+4. Update IFX definition:
+
+   ```bash
+   pnpm ifx provision
+   ```
+
+> Example handler: `./integrations/hello/src/eventsHandlers/example.ts`.
 
 ---
 
 # Commands
 
-### General Information
+### General
 
-- By default, **all commands run in the `sandbox` environment**. Use the `--env=prod` flag to run commands in production.  
-- Running `pnpm run ifx` implicitly runs `turbo run ifx` — it tries to apply this script to all integrations and packages.  
-- To run commands for a specific integration:
-  - Run it inside the integration's folder.  
-  - Use `turbo --filter=@ifx/my-integration-name`.  
+* Commands default to the **sandbox** environment. Use `--env=prod` for production.
+* You can run commands for a **specific integration** using:
+
+  ```bash
+  pnpm ifx <command> --integration=my-integration
+  ```
+* Or run them for all integrations by omitting `--integration`.
 
 ---
 
 ### Available Commands
 
-#### **`pnpm run ifx:init`**  
-Creates and provisions a new integration in ArcXP.
-- Copies the "hello" boilerplate to the `./integrations` folder
-- Runs `pnpm run ifx:provision` inside the new integration folder.
+#### `pnpm ifx init`
 
----
+Initialize a new integration.
 
-#### **`pnpm run ifx:provision`**  
-Creates or updates the integration in ArcXP.
-- Applies settings from `ifx-definition.yml`.
-- If the integration does not exist, it will be created.
-- If it already exists, it updates:
-  - Status (`enable`/`disable`)
-  - Subscribed events
-  - Secret variables (from `.env.sandbox` or `.env.prod`)
+#### `pnpm ifx provision`
 
-> **Note:** Integration-specific `.env.sandbox` files take precedence over the root `.env.sandbox`.
+Create or update the integration in IFX using `ifx-definition.yml`.
 
----
+#### `pnpm ifx deploy`
 
-#### **`pnpm run ifx:deploy`**  
-Delivers your code to ArcXP:  
-- Lints, builds, and packages the integration code.  
-- Uploads a new bundle and promotes it on ArcXP.
+Build and deploy the integration bundle to IFX.
 
----
+#### `pnpm ifx build`
 
-#### **`pnpm run ifx:build`**  
-Builds the integration:  
-- Runs necessary steps for creating a valid build. (see `build.cmd.ts`)  
-- Runs a `health` handler to verify the validity of the build.
+Build the integration and validate with the `health` handler.
 
----
+#### `pnpm ifx promote`
 
-#### **`pnpm run ifx:promote`**  
-Promotes (makes LIVE) the selected bundle.  
+Promote a deployed bundle to **LIVE**.
 
----
+#### `pnpm ifx destroy`
 
-#### **`pnpm run ifx:destroy`**  
-Delete the selected integration.
+Delete an integration.
 
----
+#### `pnpm ifx logs`
 
-#### **`pnpm run ifx:logs`**  
-Prints the latest logs for every integration.
+Show latest logs for integrations.
 
----
+#### `pnpm ifx status`
 
-#### **`pnpm run ifx:status`**  
-Prints detailed information about the integrations, including:  
-- The integration object itself.  
-- Bundles.  
-- Subscriptions.  
-- Secrets.
+Show detailed integration information (bundles, subscriptions, secrets, etc).
 
----
+#### `pnpm ifx dev`
 
-#### **`pnpm run ifx:dev`**  
-Starts a development server in watch mode:  
-- The server listens for `POST` requests to `/`.  
-- By default, it uses a random port. Override it with the `PORT` environment variable.
+Run the integration locally in watch mode.
 
-**Example request:**
+* Default: random port.
+* Override with `PORT` env.
+
+Example request:
+
 ```bash
 curl --location 'http://localhost:54265/' \
 --header 'Content-Type: application/json' \
 --data '{
-    "key": "story:create",
-    "body": {
-        "id": "test"
-    }
+  "key": "story:create",
+  "body": { "id": "test" }
 }'
 ```
 
 ---
 
-### A Few Notes:
-1. **Environment**: Always specify the environment (`sandbox` or `production`) using the `--env` flag when necessary.  
-2. **Command Scope**: Run commands within an integration folder for scope, or use `turbo --filter` to target a specific integration.
+# Notes
+
+1. Always specify `--env` (`sandbox` or `prod`) when needed.
+2. Use `--integration=<name>` to scope commands to a single integration.
 
 ---
 
-## Happy Developing!
-Feel free to explore all commands and contribute to optimizing the flow for managing ArcXP integrations.
+## Happy Developing 🎉
+
+This CLI streamlines the workflow for managing ArcXP IFX integrations.
