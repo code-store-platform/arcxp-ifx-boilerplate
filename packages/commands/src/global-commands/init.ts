@@ -170,6 +170,7 @@ export async function execute() {
 	ifxDefinition.email = ownerEmail;
 	ifxDefinition.events = allEvents;
 	ifxDefinition.description = description;
+	ifxDefinition.ignore = false;
 	fs.writeFileSync(ifxDefinitionPath, stringifyYaml(ifxDefinition));
 
 	logger.info("✅ Integration files are ready!");
