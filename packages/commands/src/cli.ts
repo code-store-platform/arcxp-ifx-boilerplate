@@ -26,7 +26,7 @@ const commands: CommandDef[] = [
 
 function runWorkspace(cmd: string, integration?: string, env?: string) {
 	const filter = integration ? `--filter=@ifx/${integration}` : "";
-	return exec("turbo", ["run", "ifx", filter, `--env=${env}`, "--", cmd].filter(Boolean));
+	return exec("turbo", ["run", "ifx", filter, "--", cmd, `--env=${env}`].filter(Boolean));
 }
 
 function runGlobal(cmd: string, env?: string) {
