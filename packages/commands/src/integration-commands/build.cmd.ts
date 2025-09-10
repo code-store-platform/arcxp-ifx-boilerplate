@@ -31,7 +31,6 @@ export class BuildCommand extends IFXCommand {
 			platform: "node",
 			define: {
 				"process.env.PRETTY_PRINT": "false",
-				"process.env.DATADOG_ENABLED": "false",
 			},
 		});
 	}
