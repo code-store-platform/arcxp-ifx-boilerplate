@@ -15,8 +15,8 @@ export const env = {
 	// Datadog keys
 	DATADOG_ENABLED: process.env.DATADOG_ENABLED || "false",
 	DATADOG_SITE: process.env.DATADOG_SITE || "datadoghq.eu",
-	DATADOG_SERVICE_NAME: process.env.DATADOG_SERVICE_NAME,
-	DATADOG_API_KEY: process.env.DATADOG_API_KEY,
+	DATADOG_SERVICE_NAME: process.env.DATADOG_SERVICE_NAME || "",
+	DATADOG_API_KEY: process.env.DATADOG_API_KEY || "",
 };
 
 export const config = <T extends {}>(obj: T) => {
