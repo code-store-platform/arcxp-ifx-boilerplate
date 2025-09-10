@@ -110,6 +110,10 @@ export class IFXService {
 
 		for (const key of Object.keys(env)) {
 			const value = overrideValues[key] || env[key]?.toString() || "";
+			if (!value) {
+				this.logger.warn(`skipping ${key} as value is empty`);
+				continue;
+			}
 
 			this.logger.debug(`Adding secret ${key}:${value}`);
 
