@@ -41,7 +41,8 @@ export class IFXService {
 				retriesLeft -= 1;
 				await sleep(5 * 1000);
 			} else {
-				for (const log of logs.events) {
+				const sorted = logs.events.sort((a, b) => +new Date(a.timestamp) - +new Date(b.timestamp));
+				for (const log of sorted) {
 					try {
 						const message = JSON.parse(log.message);
 						this.logger[message.levelLabel](message, message.msg);
