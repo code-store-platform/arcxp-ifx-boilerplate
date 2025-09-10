@@ -19,7 +19,8 @@
   "dependencies": {
     "@arcxp/arcxp-ifx-node-sdk": "1.3.1",
     "dotenv": "^16.4.5",
-    "@ifx/shared": "workspace:*"
+    "@ifx/shared": "workspace:*",
+    "pino-datadog-transport": "^3.0.6"
   },
   "devDependencies": {
     "@ifx/tsconfig": "workspace:*",

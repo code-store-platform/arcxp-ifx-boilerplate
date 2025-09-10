@@ -10,6 +10,13 @@ export const env = {
 	ARC_ACCESS_TOKEN: process.env.ARC_ACCESS_TOKEN || "",
 	PRETTY_PRINT: process.env.PRETTY_PRINT || "",
 	ARC_ENV,
+	LOG_LEVEL: process.env.LOG_LEVEL || "debug",
+
+	// Datadog keys
+	DATADOG_ENABLED: process.env.DATADOG_ENABLED || "false",
+	DATADOG_SITE: process.env.DATADOG_SITE || "datadoghq.eu",
+	DATADOG_SERVICE_NAME: process.env.DATADOG_SERVICE_NAME,
+	DATADOG_API_KEY: process.env.DATADOG_API_KEY,
 };
 
 export const config = <T extends {}>(obj: T) => {
