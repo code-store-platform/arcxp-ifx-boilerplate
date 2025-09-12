@@ -6,7 +6,10 @@ const level: Level = (env.LOG_LEVEL as Level) || "debug";
 const streams: pino.StreamEntry[] = [];
 
 if (env.PRETTY_PRINT === "true") {
-	streams.push({ level, stream: pino.transport({ target: "pino-pretty" }) });
+	streams.push({
+		level,
+		stream: pino.transport({ target: "pino-pretty", options: { translateTime: "SYS:yyyy-mm-dd HH:MM:ss.l" } }),
+	});
 } else {
 	streams.push({ level, stream: pino.destination(1) });
 }

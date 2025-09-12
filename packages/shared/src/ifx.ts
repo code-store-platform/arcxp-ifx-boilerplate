@@ -42,11 +42,18 @@ export class IFXService {
 				await sleep(5 * 1000);
 			} else {
 				const sorted = logs.events.sort((a, b) => +new Date(a.timestamp) - +new Date(b.timestamp));
+				if (!sorted.length) {
+					this.logger.warn("No logs");
+					return;
+				}
+
 				for (const log of sorted) {
 					try {
 						const message = JSON.parse(log.message);
+						message.time = log.timestamp;
 						this.logger[message.levelLabel](message, message.msg);
 					} catch {
+						log.time = log.timestamp;
 						this.logger.debug(log);
 					}
 				}
