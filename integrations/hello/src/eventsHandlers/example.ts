@@ -1,7 +1,7 @@
 import type { ArcTypes } from "@code.store/arcxp-sdk-ts";
 import { arc, handler, logger } from "@ifx/shared";
 
-export const example = handler<ArcTypes.Story.AStory>(
+export const example = handler<ArcTypes.ANS.AStory>(
 	async (event) => {
 		const storyId = event.body._id;
 		if (!storyId) {

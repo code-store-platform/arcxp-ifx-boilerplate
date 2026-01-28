@@ -22,8 +22,15 @@ export class BuildCommand extends IFXCommand {
 		execSync("npm run lint", { stdio: "inherit" });
 	}
 
+	typeCheck() {
+		execSync("npx tsc --noEmit", { stdio: "inherit" });
+	}
+
 	async build() {
 		logger.debug("Building source");
+
+		this.typeCheck();
+
 		await esbuild.build({
 			entryPoints: [this.eventsHandlersPath],
 			outdir: this.ifxDir("dist", "src"),
