@@ -10,7 +10,8 @@
 	"scripts": {
 		"lint": "pnpm exec biome lint",
 		"check": "pnpm exec biome check --write --unsafe ./",
-		"build": "pnpm exec turbo run build"
+		"build": "pnpm exec turbo run build",
+		"test:integrations": "vitest ./integrations"
 	},
 	"keywords": [
 		"ArcXP",
@@ -36,6 +37,7 @@
 		"rimraf": "^5.0.1",
 		"tsx": "^4.19.0",
 		"turbo": "^2.5.5",
-		"typescript": "^5.5.4"
+		"typescript": "^5.5.4",
+		"vitest": "^4.0.18"
 	}
 }
